@@ -1,0 +1,22 @@
+{
+  "name": "project-11-web-optimization",
+  "version": "1.0.0",
+  "description": "code needed for my web optimization project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kylahellison/Web-Optimization.git"
+  },
+  "author": "Kylah Ellison",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kylahellison/Web-Optimization/issues"
+  },
+  "homepage": "https://github.com/kylahellison/Web-Optimization#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
