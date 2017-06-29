@@ -6,6 +6,7 @@ const uglify = require('gulp-uglify'); //include gulp-uglify plugin
 const rename = require('gulp-rename'); //include gulp-rename plugin
 const concatCSS = require('gulp-concat-css'); //include gulp-concat-css plugin
 const cleanCSS = require('gulp-clean-css'); //include gulp-clean-css plugin
+const spritesmith = require('gulp.spritesmith'); //include gulp-spritesmith plugin
 
 //concatenate JS files
 gulp.task('concatScripts', function() {
@@ -37,7 +38,8 @@ gulp.task('concatCSS', function() {
 		'css/hero.css',
 		'css/photo-grid.css',
 		'css/modals.css',
-		'css/footer.css'
+		'css/footer.css',
+		'css/avatarsprite.css',
 	])
 		.pipe(concatCSS('application.css'))
 		.pipe(gulp.dest('css'));
@@ -59,18 +61,15 @@ gulp.task('build', ['minifyScripts', 'minify-css']);
 //Default task
 gulp.task('default', ['build']);
 
-// gulp.task('image', function () {
-// 	gulp.src('./src/images/*')
-// 		.pipe(image({
-// 			pngquant: true,
-// 			optipng: false,
-// 			zopflipng: true,
-// 			jpegRecompress: true,
-// 			jpegoptim: false,
-// 			mozjpeg: false,
-// 			gifsicle: true,
-// 			svgo: true
-// 		}))
-// 		.pipe(gulp.dest('./dist/images'));
-// });
+
+
+//IMAGES - not part of default or build task
+
+gulp.task('sprite', function () {
+  var spriteData = gulp.src('img/avatars/*.jpg').pipe(spritesmith({
+    imgName: 'avatarsprite.jpg',
+    cssName: 'avatarsprite.css'
+  }));
+  return spriteData.pipe(gulp.dest('dist'));
+});
 
