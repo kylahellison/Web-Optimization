@@ -7,6 +7,8 @@ const rename = require('gulp-rename'); //include gulp-rename plugin
 const concatCSS = require('gulp-concat-css'); //include gulp-concat-css plugin
 const cleanCSS = require('gulp-clean-css'); //include gulp-clean-css plugin
 const spritesmith = require('gulp.spritesmith'); //include gulp-spritesmith plugin
+const htmlmin = require('gulp-htmlmin'); //include gulp-htmlmin plugin
+const gzip = require('gulp-gzip'); //include gulp-gzip plugin
 
 //concatenate JS files
 gulp.task('concatScripts', function() {
@@ -52,7 +54,14 @@ gulp.task('minify-css', ['concatCSS'], function() {
 		.pipe(gulp.dest('./dist'))
 });
 
+// gulp.task('minify-html', function() {
+//   return gulp.src('*.html')
+//     .pipe(htmlmin({collapseWhitespace: true}))
+//     .pipe(gulp.dest('dist'));
+// });
 
+
+//		.pipe(gzip())
 
 //build task
 gulp.task('build', ['minifyScripts', 'minify-css']);
@@ -71,5 +80,13 @@ gulp.task('sprite', function () {
     cssName: 'avatarsprite.css'
   }));
   return spriteData.pipe(gulp.dest('dist'));
+});
+
+gulp.task('spritephotos', function () {
+  var spritePhotoData = gulp.src('img/photos/*.jpg').pipe(spritesmith({
+    imgName: 'photosprite.jpg',
+    cssName: 'photosprite.css'
+  }));
+  return spritePhotoData.pipe(gulp.dest('dist'));
 });
 
